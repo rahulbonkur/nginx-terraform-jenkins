@@ -1,7 +1,8 @@
 
-# -------------------------
+
+# =====================
 # VPC
-# -------------------------
+# =====================
 resource "aws_vpc" "rahul_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = true
@@ -12,9 +13,9 @@ resource "aws_vpc" "rahul_vpc" {
   }
 }
 
-# -------------------------
+# =====================
 # Internet Gateway
-# -------------------------
+# =====================
 resource "aws_internet_gateway" "rahul_igw" {
   vpc_id = aws_vpc.rahul_vpc.id
 
@@ -23,9 +24,9 @@ resource "aws_internet_gateway" "rahul_igw" {
   }
 }
 
-# -------------------------
+# =====================
 # Public Subnet
-# -------------------------
+# =====================
 resource "aws_subnet" "rahul_public_subnet" {
   vpc_id                  = aws_vpc.rahul_vpc.id
   cidr_block              = "10.0.1.0/24"
@@ -37,9 +38,9 @@ resource "aws_subnet" "rahul_public_subnet" {
   }
 }
 
-# -------------------------
+# =====================
 # Route Table
-# -------------------------
+# =====================
 resource "aws_route_table" "rahul_public_rt" {
   vpc_id = aws_vpc.rahul_vpc.id
 
@@ -53,32 +54,28 @@ resource "aws_route_table" "rahul_public_rt" {
   }
 }
 
-# -------------------------
-# Route Table Association
-# -------------------------
 resource "aws_route_table_association" "rahul_public_assoc" {
   subnet_id      = aws_subnet.rahul_public_subnet.id
   route_table_id = aws_route_table.rahul_public_rt.id
 }
 
-# -------------------------
+# =====================
 # Security Group
-# -------------------------
+# =====================
 resource "aws_security_group" "rahul_web_sg" {
-  name        = "rahul-web-sg"
-  description = "Allow HTTP and SSH"
-  vpc_id      = aws_vpc.rahul_vpc.id
+  name   = "rahul-web-sg"
+  vpc_id = aws_vpc.rahul_vpc.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port   = 22
-    to_port     = 22
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -95,35 +92,25 @@ resource "aws_security_group" "rahul_web_sg" {
   }
 }
 
-# -------------------------
-# EC2 (Amazon Linux)
-# -------------------------
+# =====================
+# EC2 (Amazon Linux + HEAVY PORTFOLIO)
+# =====================
 resource "aws_instance" "rahul_ec2" {
-  ami                         = "ami-0a4408457f9a03be3" # Amazon Linux 2023
-  instance_type               = "t2.micro"
-  subnet_id                   = aws_subnet.rahul_public_subnet.id
-  vpc_security_group_ids      = [aws_security_group.rahul_web_sg.id]
-  associate_public_ip_address = true
-  key_name                    = var.key_name
+  ami                    = "ami-0a4408457f9a03be3" # Amazon Linux 2
+  instance_type          = "t2.micro"
+  key_name               = "mykey"
+  subnet_id              = aws_subnet.rahul_public_subnet.id
+  vpc_security_group_ids = [aws_security_group.rahul_web_sg.id]
 
   user_data = <<-EOF
-              #!/bin/bash
-              set -eux
+    #!/bin/bash
+    yum update -y
+    yum install -y nginx
+    systemctl start nginx
+    systemctl enable nginx
 
-              # Update system
-              dnf update -y
-
-              # Install nginx (AMAZON LINUX WAY)
-              dnf install -y nginx
-
-              # Start & enable nginx
-              systemctl enable nginx
-              systemctl start nginx
-
-              # Deploy portfolio
-              cat <<HTML > /usr/share/nginx/html/index.html
-              <!DOCTYPE html>
-              <!DOCTYPE html>
+    cat <<'HTML' > /usr/share/nginx/html/index.html
+    <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
@@ -245,13 +232,10 @@ resource "aws_instance" "rahul_ec2" {
 
     </body>
     </html>
-              HTML
-              EOF
+    HTML
+  EOF
 
   tags = {
     Name = "rahul-ec2"
   }
 }
-# -------------------------
-# Outputs
-# -------------------------
