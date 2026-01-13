@@ -99,19 +99,28 @@ resource "aws_security_group" "rahul_web_sg" {
 # EC2 (Amazon Linux)
 # -------------------------
 resource "aws_instance" "rahul_ec2" {
-  ami                    = "ami-0a4408457f9a03be3" # Amazon Linux 2023 (ap-south-1)
-  instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.rahul_public_subnet.id
-  vpc_security_group_ids = [aws_security_group.rahul_web_sg.id]
-  key_name               = "mykey"
+  ami                         = "ami-0a4408457f9a03be3" # Amazon Linux 2023
+  instance_type               = "t2.micro"
+  subnet_id                   = aws_subnet.rahul_public_subnet.id
+  vpc_security_group_ids      = [aws_security_group.rahul_web_sg.id]
+  associate_public_ip_address = true
+  key_name                    = var.key_name
 
   user_data = <<-EOF
               #!/bin/bash
-              yum update -y
-              yum install -y nginx
-              systemctl start nginx
-              systemctl enable nginx
+              set -eux
 
+              # Update system
+              dnf update -y
+
+              # Install nginx (AMAZON LINUX WAY)
+              dnf install -y nginx
+
+              # Start & enable nginx
+              systemctl enable nginx
+              systemctl start nginx
+
+              # Deploy portfolio
               cat <<HTML > /usr/share/nginx/html/index.html
               <!DOCTYPE html>
               <html>
@@ -136,11 +145,7 @@ resource "aws_instance" "rahul_ec2" {
                     text-align: center;
                   }
                   h1 {
-                    margin-bottom: 10px;
                     color: #38bdf8;
-                  }
-                  p {
-                    opacity: 0.85;
                   }
                 </style>
               </head>
@@ -148,18 +153,17 @@ resource "aws_instance" "rahul_ec2" {
                 <div class="card">
                   <h1>Rahul Bonkur</h1>
                   <p>Web Developer → AWS & DevOps</p>
-                  <p>Powered by Terraform + Jenkins</p>
+                  <p>Deployed via Jenkins + Terraform</p>
                 </div>
               </body>
               </html>
-HTML
+              HTML
               EOF
 
   tags = {
     Name = "rahul-ec2"
   }
 }
-
 # -------------------------
 # Outputs
 # -------------------------
