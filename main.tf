@@ -123,40 +123,128 @@ resource "aws_instance" "rahul_ec2" {
               # Deploy portfolio
               cat <<HTML > /usr/share/nginx/html/index.html
               <!DOCTYPE html>
-              <html>
-              <head>
-                <title>Rahul Bonkur | Portfolio</title>
-                <style>
-                  body {
-                    margin: 0;
-                    font-family: Arial, sans-serif;
-                    background: #0f172a;
-                    color: white;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                  }
-                  .card {
-                    background: #020617;
-                    padding: 40px;
-                    border-radius: 12px;
-                    box-shadow: 0 0 30px rgba(56,189,248,0.3);
-                    text-align: center;
-                  }
-                  h1 {
-                    color: #38bdf8;
-                  }
-                </style>
-              </head>
-              <body>
-                <div class="card">
-                  <h1>Rahul Bonkur</h1>
-                  <p>Web Developer → AWS & DevOps</p>
-                  <p>Deployed via Jenkins + Terraform</p>
-                </div>
-              </body>
-              </html>
+              <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Rahul Bonkur | Cloud & DevOps Engineer</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          margin: 0;
+          font-family: 'Segoe UI', sans-serif;
+          background: #020617;
+          color: #e5e7eb;
+        }
+        header {
+          background: linear-gradient(135deg, #020617, #0f172a);
+          padding: 80px 20px;
+          text-align: center;
+        }
+        header h1 {
+          font-size: 48px;
+          color: #38bdf8;
+        }
+        header p {
+          font-size: 18px;
+          opacity: 0.85;
+        }
+        section {
+          max-width: 1100px;
+          margin: auto;
+          padding: 60px 20px;
+        }
+        h2 {
+          color: #38bdf8;
+          margin-bottom: 20px;
+        }
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+        }
+        .card {
+          background: #020617;
+          border: 1px solid #1e293b;
+          padding: 25px;
+          border-radius: 14px;
+          box-shadow: 0 0 20px rgba(56,189,248,0.15);
+        }
+        footer {
+          background: #020617;
+          text-align: center;
+          padding: 30px;
+          border-top: 1px solid #1e293b;
+          opacity: 0.8;
+        }
+      </style>
+    </head>
+    <body>
+
+      <header>
+        <h1>Rahul Bonkur</h1>
+        <p>Cloud & DevOps Engineer | AWS | Terraform | Jenkins</p>
+        <p>Building automated, scalable & production-ready cloud systems</p>
+      </header>
+
+      <section>
+        <h2>About Me</h2>
+        <div class="card">
+          <p>
+            I am a Cloud & DevOps Engineer with a strong foundation in Web Development and
+            Infrastructure Automation. I specialize in designing AWS architectures,
+            building CI/CD pipelines, and deploying production-ready systems using
+            Terraform and Jenkins.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Core Skills</h2>
+        <div class="grid">
+          <div class="card">AWS (EC2, VPC, IAM, S3)</div>
+          <div class="card">Terraform (IaC)</div>
+          <div class="card">Jenkins (CI/CD)</div>
+          <div class="card">Linux (Amazon Linux)</div>
+          <div class="card">Docker & Containers</div>
+          <div class="card">Networking & Security</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Automated AWS Infra</h3>
+            <p>Provisioned VPC, EC2, Security Groups using Terraform.</p>
+          </div>
+          <div class="card">
+            <h3>CI/CD Pipeline</h3>
+            <p>Built Jenkins pipelines for automated build & deployment.</p>
+          </div>
+          <div class="card">
+            <h3>Nginx Web Hosting</h3>
+            <p>Automated web hosting using Amazon Linux & Nginx.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Career Goal</h2>
+        <div class="card">
+          <p>
+            My goal is to become a highly skilled Cloud & DevOps Engineer working on
+            large-scale infrastructure, automation, and high-availability systems.
+          </p>
+        </div>
+      </section>
+
+      <footer>
+        <p>© Rahul Bonkur | Powered by Terraform & AWS</p>
+      </footer>
+
+    </body>
+    </html>
               HTML
               EOF
 
