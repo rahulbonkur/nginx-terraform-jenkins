@@ -111,127 +111,208 @@ resource "aws_instance" "rahul_ec2" {
 
     cat <<'HTML' > /usr/share/nginx/html/index.html
     <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Rahul Bonkur | Cloud & DevOps Engineer</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <style>
-        body {
-          margin: 0;
-          font-family: 'Segoe UI', sans-serif;
-          background: #020617;
-          color: #e5e7eb;
-        }
-        header {
-          background: linear-gradient(135deg, #020617, #0f172a);
-          padding: 80px 20px;
-          text-align: center;
-        }
-        header h1 {
-          font-size: 48px;
-          color: #38bdf8;
-        }
-        header p {
-          font-size: 18px;
-          opacity: 0.85;
-        }
-        section {
-          max-width: 1100px;
-          margin: auto;
-          padding: 60px 20px;
-        }
-        h2 {
-          color: #38bdf8;
-          margin-bottom: 20px;
-        }
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-        }
-        .card {
-          background: #020617;
-          border: 1px solid #1e293b;
-          padding: 25px;
-          border-radius: 14px;
-          box-shadow: 0 0 20px rgba(56,189,248,0.15);
-        }
-        footer {
-          background: #020617;
-          text-align: center;
-          padding: 30px;
-          border-top: 1px solid #1e293b;
-          opacity: 0.8;
-        }
-      </style>
-    </head>
-    <body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rahul Bonkur | Web Developer & DevOps Engineer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <header>
-        <h1>Rahul Bonkur</h1>
-        <p>Cloud & DevOps Engineer | AWS | Terraform | Jenkins</p>
-        <p>Building automated, scalable & production-ready cloud systems</p>
-      </header>
+<style>
+:root{
+  --glow1: rgba(0,180,255,.45);
+  --glow2: rgba(0,255,200,.35);
+  --bg:#050b12;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.65);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Figtree',system-ui,Arial;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-      <section>
-        <h2>About Me</h2>
-        <div class="card">
-          <p>
-            I am a Cloud & DevOps Engineer with a strong foundation in Web Development and
-            Infrastructure Automation. I specialize in designing AWS architectures,
-            building CI/CD pipelines, and deploying production-ready systems using
-            Terraform and Jenkins.
-          </p>
-        </div>
-      </section>
+/* BACKGROUND */
+canvas{position:fixed;inset:0;z-index:-2}
+.glow{position:fixed;width:700px;height:700px;background:var(--glow1);filter:blur(160px);top:10%;left:60%;z-index:-1;animation:float 18s infinite}
+.glow.small{width:500px;height:500px;background:var(--glow2);top:55%;left:20%;animation-duration:14s}
+@keyframes float{50%{transform:translate(60px,-40px)}}
 
-      <section>
-        <h2>Core Skills</h2>
-        <div class="grid">
-          <div class="card">AWS (EC2, VPC, IAM, S3)</div>
-          <div class="card">Terraform (IaC)</div>
-          <div class="card">Jenkins (CI/CD)</div>
-          <div class="card">Linux (Amazon Linux)</div>
-          <div class="card">Docker & Containers</div>
-          <div class="card">Networking & Security</div>
-        </div>
-      </section>
+/* GLOBAL */
+.section{padding:140px 8%;max-width:1400px;margin:auto}
+.reveal{opacity:0;transform:translateY(60px);transition:1s ease}
+.reveal.visible{opacity:1;transform:none}
 
-      <section>
-        <h2>Projects</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>Automated AWS Infra</h3>
-            <p>Provisioned VPC, EC2, Security Groups using Terraform.</p>
-          </div>
-          <div class="card">
-            <h3>CI/CD Pipeline</h3>
-            <p>Built Jenkins pipelines for automated build & deployment.</p>
-          </div>
-          <div class="card">
-            <h3>Nginx Web Hosting</h3>
-            <p>Automated web hosting using Amazon Linux & Nginx.</p>
-          </div>
-        </div>
-      </section>
+/* HERO */
+.hero{min-height:100vh;display:flex;gap:80px;align-items:center}
+.hero h1{font-size:70px;background:linear-gradient(90deg,#5ce1ff,#00ffc3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);line-height:1.9;max-width:650px}
+.hero img{width:480px;border-radius:26px;box-shadow:0 0 120px var(--glow1);transition:.4s}
+.hero img:hover{transform:scale(1.05)}
 
-      <section>
-        <h2>Career Goal</h2>
-        <div class="card">
-          <p>
-            My goal is to become a highly skilled Cloud & DevOps Engineer working on
-            large-scale infrastructure, automation, and high-availability systems.
-          </p>
-        </div>
-      </section>
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
+.card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  padding:32px;
+  backdrop-filter:blur(14px);
+  transition:.4s;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 0 40px var(--glow2)}
+.card img{width:100%;border-radius:14px;margin-bottom:16px;transition:.4s}
+.card:hover img{transform:scale(1.07)}
 
-      <footer>
-        <p>© Rahul Bonkur | Powered by Terraform & AWS</p>
-      </footer>
+/* SKILLS */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.skill{padding:22px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
 
-    </body>
-    </html>
+/* FOOTER */
+footer{padding:80px 8%;text-align:center;color:var(--muted)}
+
+@media(max-width:900px){
+  .hero{flex-direction:column;text-align:center}
+  .hero img{width:300px}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="dots"></canvas>
+<div class="glow"></div>
+<div class="glow small"></div>
+
+<!-- HERO -->
+<section class="section hero reveal">
+  <div>
+    <h1>Rahul Bonkur</h1>
+    <p>
+      Web Developer with a strong foundation in Information Technology and a
+      growing specialization in Cloud & DevOps Engineering.
+    </p>
+    <p>
+      I design and build websites — then take full ownership of how they are
+      deployed, automated, secured, and scaled in real production environments.
+    </p>
+    <p>
+      Currently transitioning into DevOps, focusing on AWS infrastructure,
+      Infrastructure as Code, CI/CD pipelines, and Linux-based systems.
+    </p>
+  </div>
+  <img src="/assets/rahul.jpeg" alt="Rahul Bonkur">
+</section>
+
+<!-- DEVOPS / CLOUD -->
+<section class="section reveal">
+<h2>Cloud & DevOps Focus</h2>
+<div class="cards">
+
+<div class="card">
+<h3>AWS Core Services</h3>
+<p>EC2, VPC, Subnets, Route Tables, Internet Gateway, Security Groups, IAM & S3 remote state.</p>
+</div>
+
+<div class="card">
+<h3>Networking & Security</h3>
+<p>Public/private networking, inbound–outbound rules, SSH access, port exposure and isolation.</p>
+</div>
+
+<div class="card">
+<h3>Infrastructure as Code</h3>
+<p>Terraform modules, variables, outputs, backend configuration and state locking.</p>
+</div>
+
+<div class="card">
+<h3>CI/CD Pipelines</h3>
+<p>Jenkins pipelines for infrastructure provisioning and application deployment automation.</p>
+</div>
+
+<div class="card">
+<h3>Containers & Docker</h3>
+<p>Dockerizing applications, container lifecycle, images, volumes and runtime configs.</p>
+</div>
+
+<div class="card">
+<h3>Linux Administration</h3>
+<p>System services, permissions, Nginx, logs, SSH hardening and server troubleshooting.</p>
+</div>
+
+</div>
+</section>
+
+<!-- SKILLS -->
+<section class="section reveal">
+<h2>Technical Skills</h2>
+<div class="skills">
+
+<div class="skill">AWS (EC2, VPC, IAM, S3)</div>
+<div class="skill">Terraform</div>
+<div class="skill">Jenkins</div>
+<div class="skill">Docker</div>
+<div class="skill">Linux</div>
+<div class="skill">Nginx</div>
+<div class="skill">Git & GitHub</div>
+<div class="skill">CI/CD Pipelines</div>
+<div class="skill">WordPress Development</div>
+<div class="skill">SEO & Performance</div>
+
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section reveal">
+<h2>Selected Projects</h2>
+<div class="cards">
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2025/11/International-Collagen-Resource.jpg.webp"><h3>International Collagen Resource</h3><p>B2B collagen casing platform built for global manufacturing markets.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2025/11/Attri-Tech.jpg.webp"><h3>Attri Tech Machines</h3><p>Industrial CNC machinery website with technical clarity.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2025/06/Ploutos-General-Trading-FZCO.png.webp"><h3>Ploutos General Trading</h3><p>Corporate trading website for global operations.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2024/12/XLNC-REALTY.png.webp"><h3>XLNC Realty</h3><p>Premium real estate showcase website.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2025/06/akhanda.png.webp"><h3>Akhanda</h3><p>Culture-driven brand website with immersive visuals.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2025/06/Madhav-Consultants-Private-Limited-.png.webp"><h3>Madhav Consultants</h3><p>Corporate consulting and professional services website.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2025/11/Eigen-Prostate-Care-Centre-.jpg.webp"><h3>Eigen Prostate Care</h3><p>Medical website designed for trust and accessibility.</p></div>
+
+<div class="card"><img src="https://www.hiya.website/wp-content/uploads/2024/11/Hoam.Club-removebg-preview.png.webp"><h3>House of Amit Mehta</h3><p>Luxury personal brand and lifestyle website.</p></div>
+
+</div>
+</section>
+
+<footer>
+© Rahul Bonkur — Web · Cloud · DevOps · Automation
+</footer>
+
+<script>
+const c=document.getElementById("dots"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();addEventListener("resize",resize);
+const dots=[...Array(150)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.3,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}));
+(function loop(){
+ctx.clearRect(0,0,c.width,c.height);
+dots.forEach(d=>{
+ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+ctx.fillStyle="rgba(255,255,255,.6)";ctx.fill();
+d.x+=d.vx;d.y+=d.vy;
+if(d.x<0||d.x>c.width)d.vx*=-1;
+if(d.y<0||d.y>c.height)d.vy*=-1;
+});
+requestAnimationFrame(loop);
+})();
+const obs=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible")),{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
     HTML
   EOF
 
