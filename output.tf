@@ -1,3 +1,7 @@
+output "public_ip" {
+  value = aws_instance.portfolio_ec2.public_ip
+}
+
 output "website_url" {
-  value = "http://${aws_instance.portfolio.public_ip}"
+  value = "http://${aws_instance.portfolio_ec2.public_ip}"
 }
