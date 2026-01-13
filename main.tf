@@ -181,9 +181,6 @@ resource "aws_instance" "portfolio_ec2" {
   }
 }
 
-################################
-# Outputs
-################################
 output "public_ip" {
   value = aws_instance.portfolio_ec2.public_ip
 }
